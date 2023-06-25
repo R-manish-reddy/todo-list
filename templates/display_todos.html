@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+</head>
+<body>
+    <h1>todos</h1>
+    <p>Hello {{ name }}</p>
+    <a href="{% url 'logout' %}">    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Logout</button>
+    </a>
+    <a href="add-todo/"><button>Add todo</button></a>
+    {%  for obj in Todos %}
+
+        {% if obj.status %}
+            <p id="{{obj.id}}" style="text-decoration: line-through ;" >{{obj.title}}, {{obj.status}}</p>
+            <a href="unmark/{{obj.id}}/"  id="myButton" onclick="unMarkTodo('{{obj.id}}')" > Unmark </a>
+        {% else %}
+            <p id="{{obj.id}}" >{{obj.title}}, {{obj.status}}</p>
+            <a href="mark/{{obj.id}}/"  id="myButton" onclick="markTodo('{{obj.id}}')" > mark </a>
+        {% endif %}
+
+        
+        
+        <a href="update/{{obj.id}}/"> Update </a>
+        <a href="delete/{{obj.id}}/"> Delete </a>
+        <hr>
+
+    {% endfor %}
+    
+
+    <script>
+        function markTodo(arg1) {
+        //   alert(arg1);
+        // myElement = document.getElementById("demo");
+        document.getElementById(arg1).style.textDecoration = "line-through"
+          
+        }
+        function unMarkTodo(arg1) {
+        //   alert(arg1);
+        // myElement = document.getElementById("demo");
+        document.getElementById(arg1).style.textDecoration = "none"
+          
+        }
+
+        
+    </script>
+</body>
+</html>
